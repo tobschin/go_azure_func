@@ -23,7 +23,7 @@ func new -l Custom -t HttpTrigger -n products -a anonymous
 func new -l Custom -t HttpTrigger -n product-by-id -a anonymous # ==> change path in function.json
 
 ## run locally
-  func start
+func start
 ```
 
 ## Deploy to Azure

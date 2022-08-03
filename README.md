@@ -4,17 +4,25 @@ Source https://www.thorsten-hans.com/azure-functions-with-go/
 ## Create 
 
 ```sh
-  func init --worker-runtime custom
-  go mod init fn
-  go get -u github.com/gin-gonic/gin
-  mkdir cmd
-  touch cmd/api.go # dann inhalt einfugen
-  go build ./cmd/api.go
-  func new -l Custom -t HttpTrigger -n products -a anonymous
-  func start
-  func new -l Custom -t HttpTrigger -n product-by-id -a anonymous
+# Init func
+func init --worker-runtime custom
 
-  ## run locally
+# Init go module
+go mod init fn
+go get -u github.com/gin-gonic/gin
+
+# create folder
+mkdir cmd
+touch cmd/api.go # dann inhalt einfugen
+
+# build gin tonic api
+go build ./cmd/api.go
+
+# add new endpoints
+func new -l Custom -t HttpTrigger -n products -a anonymous
+func new -l Custom -t HttpTrigger -n product-by-id -a anonymous # ==> change path in function.json
+
+## run locally
   func start
 ```
 

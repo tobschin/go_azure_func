@@ -24,6 +24,10 @@ func new -l Custom -t HttpTrigger -n product-by-id -a anonymous # ==> change pat
 
 ## run locally
 func start
+
+### cross compile (needed, that app can run on Azure Cloud)
+GOOS=linux GOARCH=amd64 go build cmd/api.go
+
 ```
 
 ## Deploy to Azure

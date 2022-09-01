@@ -30,7 +30,7 @@ func getProduct(c *gin.Context) {
 	}
 	p, ok := products[id]
 	if !ok {
-		c.String(http.StatusNotFound, "Product not found")
+		c.String(http.StatusNotFound, "Product not found!!")
 		return
 	}
 	c.IndentedJSON(http.StatusOK, p)

@@ -32,13 +32,38 @@ GOOS=linux GOARCH=amd64 go build cmd/api.go
 
 ## Deploy to Azure
 ```sh
+# set variables
+STORAGE_ACCOUNT=nofearbrate1234 \
+RESOURCE_GROUP=rg-functions-with-go \
+LOCATION=germanywestcentral \
+FUNCTIONAPP_NAME=nofearbrate
+
 # create rg
-az group create -n rg-functions-with-go  -l germanywestcentral
+az group create \
+--name $RESOURCE_GROUP \ 
+--location $LOCATION
+
+# create storage account
+az storage account create \
+--name $STORAGE_ACCOUNT \
+--location $LOCATION \
+--resource-group $RESOURCE_GROUP \
+--sku Standard_LRS
 
 # create function
-az functionapp create -n nofearbrate   -g rg-functions-with-go  --consumption-plan-location germanywestcentral   --os-type Linux --runtime custom  --functions-version 3 --storage-account nofearbrate1234
+az functionapp create \
+-n $FUNCTIONAPP_NAME \
+-g $RESOURCE_GROUP  \
+--consumption-plan-location $LOCATION \
+--os-type Linux \
+--runtime custom  \
+--functions-version 3 \
+--storage-account $STORAGE_ACCOUNT
 
 # deploy
-func azure functionapp publish nofearbrate
+func azure functionapp publish $FUNCTIONAPP_NAME
+
+# destroy 
+az group delete -n $RESOURCE_GROUP
 
 ```
